@@ -1,11 +1,12 @@
 package profile
 
+import tchttp "github.com/unicloud-uos/unicloud-sdk-go/sdk/common/http"
+
 type HttpProfile struct {
 	ReqMethod  string
 	ReqTimeout int
 	Scheme     string
 	RootDomain string
-	Endpoint   string
 	// Deprecated, use Scheme instead
 	Protocol string
 }
@@ -15,7 +16,6 @@ func NewHttpProfile() *HttpProfile {
 		ReqMethod:  "GET",
 		ReqTimeout: 60,
 		Scheme:     "HTTPS",
-		RootDomain: "",
-		Endpoint:   "",
+		RootDomain: tchttp.RootDomain,
 	}
 }

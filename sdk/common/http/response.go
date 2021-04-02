@@ -26,8 +26,6 @@ type ErrorResponse struct {
 	} `json:"Response"`
 }
 
-
-
 func ParseFromHttpResponse(hr *http.Response, response Response) (err error) {
 	defer hr.Body.Close()
 	body, err := ioutil.ReadAll(hr.Body)

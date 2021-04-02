@@ -119,10 +119,7 @@ func (r *BaseRequest) GetRootDomain() string {
 func (r *BaseRequest) GetServiceDomain(service string) (domain string) {
 	// request 中更改domain
 	rootDomain := r.rootDomain
-	if rootDomain == "" {
-		rootDomain = RootDomain
-	}
-	domain = RootDomain + "/" + service
+	domain = rootDomain + "/" + service
 	return
 }
 

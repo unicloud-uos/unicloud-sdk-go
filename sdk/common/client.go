@@ -62,7 +62,8 @@ func (c *Client) InitFromEnv() (cc *Client) {
 	secretId := os.Getenv("UnicloudSecretId")
 	secretKey := os.Getenv("UnicloudSecretKey")
 	region := os.Getenv("UnicloudRegion")
-	endpoint := os.Getenv("UnicloudEndpoint")
+	rootDomain := os.Getenv("UnicloudRootDomain")
+	scheme := os.Getenv("Scheme")
 
 	if region == "" {
 		fmt.Printf("Fail to init client because env.UnicloudRegion is null ")
@@ -78,11 +79,13 @@ func (c *Client) InitFromEnv() (cc *Client) {
 		secretKey,
 	)
 
-	if endpoint == "" {
-		endpoint = "api.unicloud.com"
-	}
 	cpf := profile.NewClientProfile()
-	cpf.HttpProfile.Endpoint = endpoint
+	if rootDomain != "" {
+		cpf.HttpProfile.RootDomain = rootDomain
+	}
+	if scheme != "" {
+		cpf.HttpProfile.Scheme = scheme
+	}
 
 	c.Init(region).WithCredential(credential).WithProfile(cpf)
 	return c
@@ -116,7 +119,7 @@ func (c *Client) Send(request tchttp.Request, response tchttp.Response) (err err
 
 }
 
-func (c *Client) doSend(request tchttp.Request, response tchttp.Response) (err error){
+func (c *Client) doSend(request tchttp.Request, response tchttp.Response) (err error) {
 
 	request.GetParams()["AccessKeyId"] = c.credential.SecretId
 
@@ -124,11 +127,12 @@ func (c *Client) doSend(request tchttp.Request, response tchttp.Response) (err e
 
 	url := request.GetRequestUrl() + "&Signature=" + sign
 
-	httpRequest, err := http.NewRequest(request.GetHttpMethod(), url,request.GetBodyData())
+	httpRequest, err := http.NewRequest(request.GetHttpMethod(), url, request.GetBodyData())
 	if request.GetHttpMethod() == tchttp.POST || request.GetHttpMethod() == tchttp.PUT {
 		httpRequest.Header.Set("Content-Type", "application/json;charset=UTF-8")
 	}
-
+	fmt.Printf("url: %s\n", url)
+	fmt.Printf("Header: %+v\n", httpRequest.Header)
 	httpResponse, err := c.httpClient.Do(httpRequest)
 	if err != nil {
 		msg := fmt.Sprintf("Fail to get response because %s", err)
@@ -142,4 +146,3 @@ func (c *Client) doSend(request tchttp.Request, response tchttp.Response) (err e
 func (c *Client) GetRegion() string {
 	return c.region
 }
-

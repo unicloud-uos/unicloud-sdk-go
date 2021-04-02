@@ -6,8 +6,8 @@ import (
 )
 
 const (
-	APIVersion = "2"
-	Service    = "ebs"
+	APIVersion = ""
+	Service    = "compute/ecs/instances"
 )
 
 type Client struct {

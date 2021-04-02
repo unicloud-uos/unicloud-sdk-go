@@ -15,7 +15,6 @@ type ClientProfile struct {
 func NewClientProfile() *ClientProfile {
 	return &ClientProfile{
 		HttpProfile:     NewHttpProfile(),
-		SignMethod:      "TC3-HMAC-SHA256",
 		UnsignedPayload: false,
 		Language:        "zh-CN",
 		Debug:           false,
