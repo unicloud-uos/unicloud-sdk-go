@@ -22,7 +22,7 @@ func TestListSLbEnv(t *testing.T) {
 	response, err := client.DescribeLoadBalancers(request)
 
 	if _, ok := err.(*errors.UnicloudCloudSDKError); ok {
-			fmt.Printf("An API error has returned: %s", err)
+		fmt.Printf("An API error has returned: %s", err)
 		return
 	}
 	if err != nil {
@@ -39,25 +39,25 @@ func TestCreateSLb(t *testing.T) {
 		return
 	}
 	create := slb.CreateLoadBalancerArgs{
-				AzoneId: "HB1-BJMY2",
-				ChargeType: "postpaid",
-				ComponentProperty: slb.ComponentProperty{SpecificationCode: "slb.s1.small"},
-				InstanceCode: "SLB",
-				InstanceName: "slbccm",
-				OrderCategory: "NEW",
-				PayType: "DAY_MONTH",
-				ProductProperties: []slb.ProductProperties{
-					{
-						Address:"",
-						SubnetId:"subnet-h68ou3ylornpb",
-						VpcId:"vpc-g68ou3ylornpb",
-					},
-				},
-				Quantity:1,
-				RenewType: "notrenew",
-				RentCount: 1,
-				RentUnit: "month",
-			}
+		AzoneId: "HB1-BJMY2",
+		ChargeType: "postpaid",
+		ComponentProperty: slb.ComponentProperty{SpecificationCode: "slb.s1.small"},
+		InstanceCode: "SLB",
+		InstanceName: "slbccm",
+		OrderCategory: "NEW",
+		PayType: "DAY_MONTH",
+		ProductProperties: []slb.ProductProperties{
+			{
+				Address:"",
+				SubnetId:"subnet-h68ou3ylornpb",
+				VpcId:"vpc-g68ou3ylornpb",
+			},
+		},
+		Quantity:1,
+		RenewType: "notrenew",
+		RentCount: 1,
+		RentUnit: "month",
+	}
 	request := slb.NewCreateLoadBalancerRequest(create)
 
 	response, err := client.CreateLoadBalancers(request)
