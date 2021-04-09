@@ -16,15 +16,6 @@ type Response interface {
 type BaseResponse struct {
 }
 
-type ErrorResponse struct {
-	Response struct {
-		Error struct {
-			Code    string `json:"Code"`
-			Message string `json:"Message"`
-		} `json:"Error,omitempty"`
-		RequestId string `json:"RequestId"`
-	} `json:"Response"`
-}
 
 func ParseFromHttpResponse(hr *http.Response, response Response) (err error) {
 	defer hr.Body.Close()
@@ -34,8 +25,14 @@ func ParseFromHttpResponse(hr *http.Response, response Response) (err error) {
 		return errors.NewUnicloudCloudSDKError("ClientError.IOError", msg, "")
 	}
 	if hr.StatusCode != 200 {
-		msg := fmt.Sprintf("Request fail with http status code: %s, with body: %s", hr.Status, body)
-		return errors.NewUnicloudCloudSDKError("ClientError.HttpStatusCodeError", msg, "")
+		if hr.StatusCode == 400 || hr.StatusCode == 500{
+			msg := fmt.Sprintf("Request fail with http status code: %s, with body: %s", hr.Status, body)
+			return errors.NewUnicloudCloudSDKError("ClientError.HttpStatusCodeError", msg, "")
+		}else {
+			b := errors.UnicloudCloudSDKError{}
+			json.Unmarshal(body, &b)
+			return &b
+		}
 	}
 	//log.Printf("[DEBUG] Response Body=%s", body)
 	/*err = response.ParseErrorFromHTTPResponse(body)
