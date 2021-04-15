@@ -5,9 +5,7 @@ import (
 	"github.com/unicloud-uos/unicloud-sdk-go/sdk/common/errors"
 	slb "github.com/unicloud-uos/unicloud-sdk-go/service/slb"
 	"testing"
-
 )
-
 
 func TestListSLbEnv(t *testing.T) {
 
@@ -18,6 +16,7 @@ func TestListSLbEnv(t *testing.T) {
 	request := slb.NewDescribeLoadBalancersRequest()
 	//request.Page = 1
 	//request.Size = 10
+	request.InstanceId = "slb-kpq1nq3i23ql"
 
 	response, err := client.DescribeLoadBalancers(request)
 
@@ -28,35 +27,34 @@ func TestListSLbEnv(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Print(response.Res.Total)
 	fmt.Printf("%s", response.ToJsonString())
 }
 
 func TestCreateSLb(t *testing.T) {
 
 	client := slb.NewClientFromEnv()
-	if client == nil{
+	if client == nil {
 		return
 	}
 	create := slb.CreateLoadBalancerArgs{
-		AzoneId: "HB1-BJMY2",
-		ChargeType: "postpaid",
+		AzoneId:           "HB1-BJMY2",
+		ChargeType:        "postpaid",
 		ComponentProperty: slb.ComponentProperty{SpecificationCode: "slb.s1.small"},
-		InstanceCode: "SLB",
-		InstanceName: "slbccm",
-		OrderCategory: "NEW",
-		PayType: "DAY_MONTH",
+		InstanceCode:      "SLB",
+		InstanceName:      "slbccm",
+		OrderCategory:     "NEW",
+		PayType:           "DAY_MONTH",
 		ProductProperties: []slb.ProductProperties{
 			{
-				Address:"",
-				SubnetId:"subnet-h68ou3ylornpb",
-				VpcId:"vpc-g68ou3ylornpb",
+				Address:  "",
+				SubnetId: "subnet-h68ou3ylornpb",
+				VpcId:    "vpc-g68ou3ylornpb",
 			},
 		},
-		Quantity:1,
+		Quantity:  1,
 		RenewType: "notrenew",
 		RentCount: 1,
-		RentUnit: "month",
+		RentUnit:  "month",
 	}
 	request := slb.NewCreateLoadBalancerRequest(create)
 
@@ -71,8 +69,6 @@ func TestCreateSLb(t *testing.T) {
 	}
 	fmt.Printf("%s", response.ToJsonString())
 }
-
-
 
 func TestDeleteSLbEnv(t *testing.T) {
 
