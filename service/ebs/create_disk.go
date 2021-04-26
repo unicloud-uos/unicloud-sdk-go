@@ -24,7 +24,7 @@ type CreateDiskRequest struct {
 	Quantity int `name:"Quantity"`
 
 	// 租期。预付费必传，可选范围：1个月、2个月、3个月、6个月、1年
-	RentCount int `name:"RentCount"`
+	//RentCount int `name:"RentCount"`
 
 	// 租期单位。预付费必传，可选范围：day, month, year
 	RentUnit string `name:"RentUnit"`
