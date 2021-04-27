@@ -33,4 +33,5 @@ type LoadBalancerDetail struct {
 	InstanceName string `json:"InstanceName"`
 	Address      string `json:"Address"`
 	InstanceId   string `json:"InstanceId"`
+	Status       string `json:"Status"`
 }
