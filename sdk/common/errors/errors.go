@@ -7,7 +7,7 @@ import (
 type UnicloudCloudSDKError struct {
 	Code      string
 	RequestId string
-	Msg string
+	Msg       string
 }
 
 func (e *UnicloudCloudSDKError) Error() string {
@@ -17,7 +17,7 @@ func (e *UnicloudCloudSDKError) Error() string {
 func NewUnicloudCloudSDKError(code, message, requestId string) error {
 	return &UnicloudCloudSDKError{
 		Code:      code,
-		Msg:   message,
+		Msg:       message,
 		RequestId: requestId,
 	}
 }

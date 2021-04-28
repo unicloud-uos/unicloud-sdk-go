@@ -26,3 +26,12 @@ func NewDescribeLoadBalancersResponse() (response *DescribeLoadBalancersResponse
 	}
 	return
 }
+
+type LoadBalancerDetail struct {
+	RegionId     string `json:"RegionId"`
+	VpcId        string `json:"VpcId"`
+	InstanceName string `json:"InstanceName"`
+	Address      string `json:"Address"`
+	InstanceId   string `json:"InstanceId"`
+	Status       string `json:"Status"`
+}
