@@ -8,8 +8,8 @@ import (
 func TestAttachDisk(t *testing.T) {
 	client := ebs.NewClientFromEnv()
 	request := ebs.NewAttachDiskRequest()
-	request.InstanceId = "ecs-knn1jv1uic2r"
-	request.DiskId = "ebs-kquyqu1ayv2h"
+	request.InstanceId = "ecs-5bnnsw91o5ee498p4n2j"
+	request.DiskId = "ebs-kti4u2h8kqum"
 	response, err := client.AttachDisk(request)
 	if err != nil {
 		t.Errorf("An API error has returned: %s", err)
