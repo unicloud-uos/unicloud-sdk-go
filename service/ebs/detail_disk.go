@@ -2,6 +2,7 @@ package ebs
 
 import (
 	"encoding/json"
+	"fmt"
 	tchttp "github.com/unicloud-uos/unicloud-sdk-go/sdk/common/http"
 )
 
@@ -30,7 +31,8 @@ type Disk struct {
 	PayType           string       `json:"payType"`
 	ChargeType        int          `json:"chargeType"`
 	Expired           bool         `json:"expired"`
-	AttachInfos       []AttachInfo `json:"attachInfos"`
+	AttachInfos2       interface{}       `json:"attachInfos"`
+	AttachInfos       []AttachInfo
 }
 
 type AttachInfo struct {
@@ -61,5 +63,21 @@ func NewDetailDiskResponse() (response *DetailDiskResponse) {
 func (c *Client) DetailDisk(request *DetailDiskRequest) (response *DetailDiskResponse, err error) {
 	response = NewDetailDiskResponse()
 	err = c.Send(request, response)
+	handleDetailDiskResponse(response)
 	return
 }
+
+func handleDetailDiskResponse(response *DetailDiskResponse)  {
+	if response.Volume[0].Status == "In-use" {
+		var attachInfos []AttachInfo
+		data, _ :=json.Marshal(response.Volume[0].AttachInfos2)
+		json.Unmarshal(data, &attachInfos)
+		response.Volume[0].AttachInfos = attachInfos
+	}
+	defer func() {
+		if err := recover(); err != nil{
+			fmt.Println(err)
+		}
+	}()
+}
+

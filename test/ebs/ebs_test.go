@@ -1,6 +1,7 @@
 package ebs
 
 import (
+	"fmt"
 	"github.com/unicloud-uos/unicloud-sdk-go/service/ebs"
 	"testing"
 )
@@ -22,12 +23,16 @@ func TestDetailDisk(t *testing.T) {
 	client := ebs.NewClientFromEnv()
 
 	request := ebs.NewDetailDiskRequest()
-	request.VolumeId = "ebs-kquyqu1ayv2h"
+	request.VolumeId = "ebs-kti3g24l8x4k"
 	response, err := client.DetailDisk(request)
 	if err != nil {
 		t.Errorf("An API error has returned: %s", err)
 		return
 	}
+	if len(response.Volume[0].AttachInfos) != 0 {
+		fmt.Println("InstanceId: "+response.Volume[0].AttachInfos[0].InstanceId)
+	}
+
 	t.Log(response.ToJsonString())
 }
 
