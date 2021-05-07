@@ -39,7 +39,7 @@ func (c *Client) CreateLoadBalancersMockInit(request *CreateLoadBalancerRequest)
 	response = NewCreateLoadBalancerResponse()
 	response.Res.Resources = []Resources{
 		{
-			InstanceId: "slb-ks0ouqxkvk42",
+			InstanceId: "slb-kui4j78dzu00",
 		},
 	}
 	return

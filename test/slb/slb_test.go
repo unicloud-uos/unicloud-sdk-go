@@ -129,31 +129,31 @@ func TestCreateServerGroup(t *testing.T) {
 		return
 	}
 	create := slb.CreateServerGroupArgs{
-		LoadbalancerId: "slb-ks0pbeecmqph",
+		LoadbalancerId: "slb-kui4j78dzu00",
 		Description:    "create by go sdk",
 		Name:           "k8s-servergroup",
-		ListenerId:     "12e78de1a2774f6bbff21de51d8f4d95",
+		ListenerId:     "c5ecdb18735e4fccbff5bc3c2a62d026",
 		Algorithm:      "ROUND_ROBIN",
 		//SessionType: "",
 		//CookieName: "",
 		Servers: []slb.Servers{
 			{
 				PortId:     "eni-gSNp30763DSwJWFl4HkwHvwTnO11",
-				ServerPort: 6443,
+				ServerPort: 31515,
 				ServerIp:   "172.16.0.55",
 				Weight:     100,
 				ServerId:   "ecs-DzLw8zbtSi4lc6VYMnZpNGhrVMKrScPR",
 			},
 			{
 				PortId:     "eni-vZoMKXp1RHj5wRhp9jCCrGE2Atix",
-				ServerPort: 6443,
+				ServerPort: 31515,
 				ServerIp:   "172.16.0.52",
 				Weight:     100,
 				ServerId:   "ecs-nOKicCPmlx3AfnrU3Q9sT4f6BHRRImEz",
 			},
 			{
 				PortId:     "eni-PRIprXS2bhvbkGTkQGQA6d5mz6lM",
-				ServerPort: 6443,
+				ServerPort: 31515,
 				ServerIp:   "172.16.0.53",
 				Weight:     100,
 				ServerId:   "ecs-q79N5lunjL9nK6bnh2x13yXf1uQ53Swu",

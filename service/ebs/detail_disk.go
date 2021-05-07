@@ -2,6 +2,7 @@ package ebs
 
 import (
 	"encoding/json"
+	"fmt"
 	tchttp "github.com/unicloud-uos/unicloud-sdk-go/sdk/common/http"
 )
 
@@ -17,21 +18,26 @@ type DetailDiskResponse struct {
 }
 
 type Disk struct {
-	DiskId            string `json:"diskId"`
-	DiskName          string `json:"diskName"`
-	RegionId          string `json:"regionId"`
-	AzoneId           string `json:"azoneId"`
-	UserId            string `json:"userId"`
-	DiskType          string `json:"diskType"`
-	DiskSize          string `json:"diskSize"`
-	Status            string `json:"status"`
-	Description       string `json:"description"`
-	SpecificationCode string `json:"specificationCode"`
-	PayType           string `json:"payType"`
-	ChargeType        int    `json:"chargeType"`
-	//绑定的主机id
-	InstanceParentId string `json:"instanceParentId"`
-	Expired          bool   `json:"expired"`
+	DiskId            string      `json:"diskId"`
+	DiskName          string      `json:"diskName"`
+	RegionId          string      `json:"regionId"`
+	AzoneId           string      `json:"azoneId"`
+	UserId            string      `json:"userId"`
+	DiskType          string      `json:"diskType"`
+	DiskSize          string      `json:"diskSize"`
+	Status            string      `json:"status"`
+	Description       string      `json:"description"`
+	SpecificationCode string      `json:"specificationCode"`
+	PayType           string      `json:"payType"`
+	ChargeType        int         `json:"chargeType"`
+	Expired           bool        `json:"expired"`
+	AttachInfos2      interface{} `json:"attachInfos"`
+	AttachInfos       []AttachInfo
+}
+
+type AttachInfo struct {
+	InstanceId string `json:"instanceId"`
+	Type       string `json:"type"`
 }
 
 func (r *DetailDiskResponse) ToJsonString() string {
@@ -57,5 +63,20 @@ func NewDetailDiskResponse() (response *DetailDiskResponse) {
 func (c *Client) DetailDisk(request *DetailDiskRequest) (response *DetailDiskResponse, err error) {
 	response = NewDetailDiskResponse()
 	err = c.Send(request, response)
+	handleDetailDiskResponse(response)
 	return
+}
+
+func handleDetailDiskResponse(response *DetailDiskResponse) {
+	if response.Volume[0].Status == "In-use" {
+		var attachInfos []AttachInfo
+		data, _ := json.Marshal(response.Volume[0].AttachInfos2)
+		json.Unmarshal(data, &attachInfos)
+		response.Volume[0].AttachInfos = attachInfos
+	}
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Println(err)
+		}
+	}()
 }

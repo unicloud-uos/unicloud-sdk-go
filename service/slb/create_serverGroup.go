@@ -27,10 +27,9 @@ type CreateServerGroupArgs struct {
 
 type Servers struct {
 	PortId     string
-	ServerPort int
+	ServerPort int32
 	Weight     int
 	ServerIp   string
-	ServerName string
 	ServerId   string
 }
 
