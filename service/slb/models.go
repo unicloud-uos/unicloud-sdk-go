@@ -25,8 +25,8 @@ type ComponentProperty struct {
 }
 
 type ProductProperties struct {
-	Address  string
-	EipId    string
+	Address  string `json:"Address,omitempty"`
+	EipId    string `json:"EipId,omitempty"`
 	SubnetId string
 	VpcId    string
 }
