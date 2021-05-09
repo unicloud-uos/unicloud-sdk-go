@@ -12,6 +12,10 @@ var ValidRegions = []Region{
 	Beijing3,
 }
 
+var RegionEndpoint = map[Region]string{
+	Beijing3: "api.unicloud.com",
+}
+
 // IsValidRegion checks if r is an Ali supported region.
 func IsValidRegion(r string) bool {
 	for _, v := range ValidRegions {
@@ -20,4 +24,8 @@ func IsValidRegion(r string) bool {
 		}
 	}
 	return false
+}
+
+func GetRegionEndpoint(region string) string {
+	return RegionEndpoint[Region(region)]
 }

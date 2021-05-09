@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/unicloud-uos/unicloud-sdk-go/sdk/common"
 	"github.com/unicloud-uos/unicloud-sdk-go/sdk/common/errors"
 	slb "github.com/unicloud-uos/unicloud-sdk-go/service/slb"
+	"os"
 	"testing"
 )
 
@@ -172,4 +174,15 @@ func TestCreateServerGroup(t *testing.T) {
 		panic(err)
 	}
 	fmt.Printf("%s", response.ToJsonString())
+}
+
+func TestRegion(t *testing.T) {
+	region := "HB1-BJMYB"
+	s := common.Region(region)
+	end := common.RegionEndpoint[s]
+	fmt.Println(end)
+	fmt.Println(os.Getenv("test"))
+	os.Setenv("test", "after")
+	fmt.Println(os.Getenv("test"))
+
 }
