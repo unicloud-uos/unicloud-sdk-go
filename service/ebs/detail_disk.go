@@ -18,20 +18,20 @@ type DetailDiskResponse struct {
 }
 
 type Disk struct {
-	DiskId            string       `json:"diskId"`
-	DiskName          string       `json:"diskName"`
-	RegionId          string       `json:"regionId"`
-	AzoneId           string       `json:"azoneId"`
-	UserId            string       `json:"userId"`
-	DiskType          string       `json:"diskType"`
-	DiskSize          string       `json:"diskSize"`
-	Status            string       `json:"status"`
-	Description       string       `json:"description"`
-	SpecificationCode string       `json:"specificationCode"`
-	PayType           string       `json:"payType"`
-	ChargeType        int          `json:"chargeType"`
-	Expired           bool         `json:"expired"`
-	AttachInfos2       interface{}       `json:"attachInfos"`
+	DiskId            string      `json:"diskId"`
+	DiskName          string      `json:"diskName"`
+	RegionId          string      `json:"regionId"`
+	AzoneId           string      `json:"azoneId"`
+	UserId            string      `json:"userId"`
+	DiskType          string      `json:"diskType"`
+	DiskSize          string      `json:"diskSize"`
+	Status            string      `json:"status"`
+	Description       string      `json:"description"`
+	SpecificationCode string      `json:"specificationCode"`
+	PayType           string      `json:"payType"`
+	ChargeType        int         `json:"chargeType"`
+	Expired           bool        `json:"expired"`
+	AttachInfos2      interface{} `json:"attachInfos"`
 	AttachInfos       []AttachInfo
 }
 
@@ -67,17 +67,16 @@ func (c *Client) DetailDisk(request *DetailDiskRequest) (response *DetailDiskRes
 	return
 }
 
-func handleDetailDiskResponse(response *DetailDiskResponse)  {
-	if response.Volume[0].Status == "In-use" {
-		var attachInfos []AttachInfo
-		data, _ :=json.Marshal(response.Volume[0].AttachInfos2)
-		json.Unmarshal(data, &attachInfos)
-		response.Volume[0].AttachInfos = attachInfos
-	}
+func handleDetailDiskResponse(response *DetailDiskResponse) {
 	defer func() {
-		if err := recover(); err != nil{
+		if err := recover(); err != nil {
 			fmt.Println(err)
 		}
 	}()
+	if len(response.Volume) != 0 && response.Volume[0].Status == "In-use" {
+		var attachInfos []AttachInfo
+		data, _ := json.Marshal(response.Volume[0].AttachInfos2)
+		json.Unmarshal(data, &attachInfos)
+		response.Volume[0].AttachInfos = attachInfos
+	}
 }
-
