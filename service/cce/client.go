@@ -1,4 +1,4 @@
-package ecs
+package cce
 
 import (
 	"github.com/unicloud-uos/unicloud-sdk-go/sdk/common"
@@ -6,8 +6,8 @@ import (
 )
 
 const (
-	APIVersion = ""
-	Service    = "compute/ecs/instances"
+	APIVersion = "v2"
+	Service    = "cce"
 )
 
 type Client struct {

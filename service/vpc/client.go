@@ -1,4 +1,4 @@
-package ecs
+package vpc
 
 import (
 	"github.com/unicloud-uos/unicloud-sdk-go/sdk/common"
@@ -7,7 +7,7 @@ import (
 
 const (
 	APIVersion = ""
-	Service    = "compute/ecs/instances"
+	Service    = "networks/vpc"
 )
 
 type Client struct {
