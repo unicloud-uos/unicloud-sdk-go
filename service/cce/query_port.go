@@ -12,8 +12,8 @@ type QueryPortRequest struct {
 }
 
 type QueryPortArgs struct {
-	DeviceIds []string `json:"DeviceIds"`
-	Ids       []string `json:"Ids"`
+	DeviceIds []string `json:"DeviceIds,omitempty"`
+	Ids       []string `json:"Ids,omitempty"`
 }
 
 type QueryPortResponse struct {
@@ -21,25 +21,21 @@ type QueryPortResponse struct {
 	Res QueryPortRes `json:"res"`
 }
 
-type Port struct {
-	AdminStateUp   string    `json:"AdminStateUp"`
-	Availablezone  string    `json:"AvailableZone"`
-	DeviceId       string    `json:"DeviceId"`
-	DeviceOwner    string    `json:"DeviceOwner"`
-	FixedIps       []FixedIp `json:"FixedIps"`
-	ID             string    `json:"Id"`
-	MacAddress     string    `json:"MacAddress"`
-	OnlineType     string    `json:"OnlineType"`
-	Status         string    `json:"Status"`
-	SubnetCidr     string    `json:"SubnetCidr"`
-	SubnetId       string    `json:"SubnetId"`
-	TenantId       string    `json:"TenantId"`
-	StandardAttrId string    `json:"standardAttrId"`
+type QueryPortRes struct {
+	Count string  `json:"Count"`
+	Ports PortSet `json:"Ports"`
 }
 
-type QueryPortRes struct {
-	Count string `json:"Count"`
-	Ports []Port `json:"Ports"`
+type PortSet []Port
+
+func (s *PortSet) UnmarshalJSON(data []byte) error {
+	var port = make([]Port, 0)
+	var err error
+	if string(data) != "{}" {
+		err = json.Unmarshal(data, &port)
+	}
+	*s = port
+	return err
 }
 
 func (r *QueryPortResponse) ToJsonString() string {

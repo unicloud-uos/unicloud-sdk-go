@@ -23,7 +23,7 @@ type AssistIpAddress struct {
 
 type PortUnAssignIpAddressesResponse struct {
 	*BaseResponse
-	Res bool `json:"res"`
+	Res string `json:"res"`
 }
 
 func (r *PortUnAssignIpAddressesResponse) ToJsonString() string {

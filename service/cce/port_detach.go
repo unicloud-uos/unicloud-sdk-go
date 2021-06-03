@@ -13,7 +13,6 @@ type PortDetachRequest struct {
 
 type PortDetachArgs struct {
 	EniId  string `json:"EniId"`
-	ZoneId string `json:"ZoneId"`
 	NodeId string `json:"NodeId"`
 }
 

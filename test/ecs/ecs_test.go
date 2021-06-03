@@ -77,9 +77,9 @@ func TestCreateEni(t *testing.T) {
 	createArgs := ecs.CreateEniArgs{
 		AzoneId:     "cn-tianjin-yfb1",
 		Name:        generateEniName(),
-		VpcId:       "vpc-7iamipow2cupb",
-		SubnetId:    "caebe90ec4534f7280b79b93f5e32a7b",
-		SgId:        "sg-266p2ibq5w2ob",
+		VpcId:       "vpc-kwl49v62iws5",
+		SubnetId:    "b934aea2538e49a0b003cc9bf7972d1a",
+		SgId:        "5651bf77-210a-4aec-94a3-ece189712d63",
 		ReleaseType: 1,
 		RegionId:    client.GetRegion(),
 	}
