@@ -30,7 +30,7 @@ func TestQueryPortByEniId(t *testing.T) {
 
 func TestDescribeProductSpec(t *testing.T) {
 	client := cce.NewClientFromEnv()
-	response, err := client.DescribeProductSpec("cce.p1.xlarge.8")
+	response, err := client.DescribeProductSpec("cce.large.4")
 	if err != nil {
 		t.Errorf("An API error has returned: %s", err)
 		return
@@ -50,7 +50,7 @@ func TestPortAttach(t *testing.T) {
 
 func TestPortDetach(t *testing.T) {
 	client := cce.NewClientFromEnv()
-	response, err := client.PortDetach("16ab368d911945f3ab4a07badb452c11", "master-node-3301")
+	response, err := client.PortDetach("0d107a590cce42daadabc035398ac590", "cce-kxrqiw0r7b2o-worker-0")
 	if err != nil {
 		t.Errorf("An API error has returned: %s", err)
 		return
@@ -95,12 +95,31 @@ func TestPortCreate(t *testing.T) {
 
 func TestPortDelete(t *testing.T) {
 	client := cce.NewClientFromEnv()
-	response, err := client.PortDelete("c7fb8b66cb5547f7b0398bf7db4f17a0")
+	response, err := client.PortDelete("64382fbea3d743a59fb04d580f57e3f5")
 	if err != nil {
 		t.Errorf("An API error has returned: %s", err)
 		return
 	}
 	t.Log(response.ToJsonString())
+}
+
+func TestPortBind(t *testing.T) {
+	client := cce.NewClientFromEnv()
+	eniName := generateEniName()
+	createArgs := cce.PortCreateArgs{
+		AvailableZone: "cn-tianjin-yfb1", Name: eniName,
+		SecurityGroups: []string{"4505486d-ecc7-423c-a5e8-1fde438b7da3"},
+		SubnetId:       "137d895cda7e4781b2f9b7159eb1aea2", AssistIpCount: 0}
+	port, err := client.PortCreate(createArgs)
+	if err != nil {
+		t.Errorf("An API error has returned: %s", err)
+		return
+	}
+	t.Logf("create port:%+v", port)
+	_, err = client.PortBind(port.ID, "4505486d-ecc7-423c-a5e8-1fde438b7da3")
+	if err != nil {
+		t.Fatalf("An API error has returned: %s", err)
+	}
 }
 
 func generateEniName() string {
