@@ -11,16 +11,6 @@ type PortDeleteRequest struct {
 	PortId string `name:"portId"`
 }
 
-type PortDeleteArgs struct {
-	AssistIpAddress []string `json:AssistIpAddress`
-	AssistIpCount   int      `json:AssistIpCount`
-	AvailableZone   string   `json:"AvailableZone"`
-	Name            string   `json:"Name"`
-	SecurityGroups  []string `json:"Security_groups"`
-	SubnetId        string   `json:"SubnetId"`
-	TenantId        string   `json:"TenantId"`
-}
-
 type PortDeleteResponse struct {
 	*BaseResponse
 	Res string `json:"res"`
