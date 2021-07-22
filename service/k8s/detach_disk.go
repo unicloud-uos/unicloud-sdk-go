@@ -1,4 +1,4 @@
-package ebs
+package k8s
 
 import (
 	"encoding/json"
@@ -9,16 +9,16 @@ type DetachDiskRequest struct {
 	*tchttp.BaseRequest
 	InstanceId string `name:"InstanceId"`
 	NodeId     string `name:"NodeId"`
-	DomainId     string `name:"DomainId"`
+	DomainId   string `name:"DomainId"`
 	DiskId     string `name:"DiskId"`
 }
 
 type DetachDiskResponse struct {
 	*tchttp.BaseResponse
-	RequestId string `name:"RequestId" string`
-	Status bool `name:"status" bool`
-	Msg string `name:"msg" string`
-	Res interface{} `name:"res" string`
+	RequestId string      `name:"RequestId" string`
+	Status    bool        `name:"status" bool`
+	Msg       string      `name:"msg" string`
+	Res       interface{} `name:"res" string`
 }
 
 func (r *DetachDiskResponse) ToJsonString() string {

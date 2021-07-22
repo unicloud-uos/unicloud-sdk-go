@@ -6,8 +6,8 @@ import (
 )
 
 func TestAttachDisk(t *testing.T) {
-	client := ebs.NewClientFromEnv()
-	request := ebs.NewAttachDiskRequest()
+	client := k8s.NewClientFromEnv()
+	request := k8s.NewAttachDiskRequest()
 	request.InstanceId = "cce-gb0k3oyb7vf-331"
 	request.NodeId = "cce-gb0k3oyb7vf-331-worker-3"
 	request.DomainId = "bms-1t1aq5508lx85i29s85k"
@@ -25,8 +25,8 @@ func TestAttachDisk(t *testing.T) {
 }
 
 func TestDetachDisk(t *testing.T) {
-	client := ebs.NewClientFromEnv()
-	request := ebs.NewDetachDiskRequest()
+	client := k8s.NewClientFromEnv()
+	request := k8s.NewDetachDiskRequest()
 	request.InstanceId = "cce-gb0k3oyb7vf-331"
 	request.NodeId = "cce-gb0k3oyb7vf-331-worker-3"
 	request.DomainId = "bms-1t1aq5508lx85i29s85k"
@@ -44,9 +44,9 @@ func TestDetachDisk(t *testing.T) {
 }
 
 func TestDetailDisk(t *testing.T) {
-	client := ebs.NewClientFromEnv()
+	client := k8s.NewClientFromEnv()
 
-	request := ebs.NewDetailDiskRequest()
+	request := k8s.NewDetailDiskRequest()
 	request.DiskId = "ebs-k14t61c5la6m"
 	response, err := client.DetailDisk(request)
 	if err != nil {

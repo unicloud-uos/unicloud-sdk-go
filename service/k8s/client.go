@@ -1,4 +1,4 @@
-package ebs
+package k8s
 
 import (
 	"github.com/unicloud-uos/unicloud-sdk-go/sdk/common"
@@ -7,7 +7,7 @@ import (
 
 const (
 	APIVersion = ""
-	Service    = "apicce"
+	Service    = "cce"
 )
 
 type Client struct {

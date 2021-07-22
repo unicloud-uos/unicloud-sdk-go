@@ -1,4 +1,4 @@
-package ebs
+package k8s
 
 import (
 	"encoding/json"
@@ -13,10 +13,10 @@ type DetailDiskRequest struct {
 type DetailDiskResponse struct {
 	*tchttp.BaseResponse
 	RequestId string `json:"RequestId"`
-	Status bool `name:"status" string`
-	Msg string `name:"msg" string`
-	Disk    Disk `json:"Res"`
-	Disk2 Disk2 `json:"Resd"`
+	Status    bool   `name:"status" string`
+	Msg       string `name:"msg" string`
+	Disk      Disk   `json:"Res"`
+	Disk2     Disk2  `json:"Resd"`
 }
 
 type Disk struct {
@@ -28,7 +28,7 @@ type Disk struct {
 	Wwn          string `json:"wwn"`
 }
 
-type Disk2 struct {}
+type Disk2 struct{}
 
 func (r *DetailDiskResponse) ToJsonString() string {
 	b, _ := json.Marshal(r)
