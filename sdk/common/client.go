@@ -5,6 +5,7 @@ import (
 	"github.com/unicloud-uos/unicloud-sdk-go/sdk/common/errors"
 	tchttp "github.com/unicloud-uos/unicloud-sdk-go/sdk/common/http"
 	"github.com/unicloud-uos/unicloud-sdk-go/sdk/common/profile"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -131,8 +132,18 @@ func (c *Client) doSend(request tchttp.Request, response tchttp.Response) (err e
 	if request.GetHttpMethod() == tchttp.POST || request.GetHttpMethod() == tchttp.PUT {
 		httpRequest.Header.Set("Content-Type", "application/json;charset=UTF-8")
 	}
+	httpRequest.Host = "api.unicloud.com"
 	fmt.Printf("url: %s\n", url)
 	fmt.Printf("Header: %+v\n", httpRequest.Header)
+	if httpRequest.GetBody != nil {
+		body, err := httpRequest.GetBody()
+		if err == nil {
+			buf, err := ioutil.ReadAll(body)
+			if err == nil {
+				fmt.Printf("Body: %v\n", string(buf))
+			}
+		}
+	}
 	httpResponse, err := c.httpClient.Do(httpRequest)
 	if err != nil {
 		msg := fmt.Sprintf("Fail to get response because %s", err)

@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"github.com/unicloud-uos/unicloud-sdk-go/sdk/common/errors"
 	"io/ioutil"
+	"log"
+
 	//"log"
 	"net/http"
 )
@@ -22,6 +24,7 @@ func ParseFromHttpResponse(hr *http.Response, response Response) (err error) {
 		msg := fmt.Sprintf("Fail to read response body because %s", err)
 		return errors.NewUnicloudCloudSDKError("ClientError.IOError", msg, "")
 	}
+	log.Printf("[DEBUG] Response Body=%s", body)
 	if hr.StatusCode != 200 {
 		if hr.StatusCode == 400 || hr.StatusCode == 500 {
 			msg := fmt.Sprintf("Request fail with http status code: %s, with body: %s", hr.Status, body)
@@ -32,7 +35,6 @@ func ParseFromHttpResponse(hr *http.Response, response Response) (err error) {
 			return &b
 		}
 	}
-	//log.Printf("[DEBUG] Response Body=%s", body)
 	/*err = response.ParseErrorFromHTTPResponse(body)
 	if err != nil {
 		return
