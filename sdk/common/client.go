@@ -132,7 +132,6 @@ func (c *Client) doSend(request tchttp.Request, response tchttp.Response) (err e
 	if request.GetHttpMethod() == tchttp.POST || request.GetHttpMethod() == tchttp.PUT {
 		httpRequest.Header.Set("Content-Type", "application/json;charset=UTF-8")
 	}
-	httpRequest.Host = "api.unicloud.com"
 	fmt.Printf("url: %s\n", url)
 	fmt.Printf("Header: %+v\n", httpRequest.Header)
 	if httpRequest.GetBody != nil {
