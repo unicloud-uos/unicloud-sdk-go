@@ -1,4 +1,4 @@
-package ecs
+package ebs
 
 import (
 	"github.com/unicloud-uos/unicloud-sdk-go/sdk/common"
