@@ -63,7 +63,7 @@ func (c *Client) InitFromEnv() (cc *Client) {
 	secretId := os.Getenv("UnicloudSecretId")
 	secretKey := os.Getenv("UnicloudSecretKey")
 	region := os.Getenv("UnicloudRegion")
-	schemeDomain := os.Getenv("UnicloudSchemeDomain")
+	schemeDomain := os.Getenv("UnicloudOpenapiAddress")
 	if region == "" {
 		fmt.Printf("Fail to init client because env.UnicloudRegion is null ")
 		return nil
