@@ -14,72 +14,71 @@ import (
 )
 
 const (
-	POST = "POST"
-	GET  = "GET"
-	PUT  = "PUT"
-
-	HTTP  = "http"
-	HTTPS = "https"
-
-	RootDomain = "api.unicloud.com"
-	Path       = ""
+	POST         = "POST"
+	GET          = "GET"
+	PUT          = "PUT"
+	Path         = ""
+	SchemeDomain = "https://api.unicloud.com"
 )
 
 type Request interface {
 	GetAction() string
 	GetBodyReader() io.Reader
 	GetBodyData() io.Reader
-	GetScheme() string
-	GetRootDomain() string
+	GetSchemeDomain() string
 	GetServiceDomain(string) string
-	GetDomain() string
 	GetHttpMethod() string
 	GetParams() map[string]string
 	GetService() string
 	GetVersion() string
 	GetRequestUrl() string
-
-	SetScheme(string)
-	SetRootDomain(string)
-	SetDomain(string)
+	SetSchemeDomain(string)
+	SetServiceDomain(string)
 	SetHttpMethod(string)
 	SetBodyData(v interface{})
 }
 
 type BaseRequest struct {
-	httpMethod string
-	scheme     string
-	rootDomain string
-	domain     string
-	path       string
-	params     map[string]string
-	formParams map[string]string
+	httpMethod    string
+	schemeDomain  string
+	serviceDomain string
+	path          string
+	params        map[string]string
+	formParams    map[string]string
 
-	service string
-	version string
-	action  string
-	data io.Reader // post body
+	service     string
+	version     string
+	action      string
+	data        io.Reader // post body
 	accessKeyId string
 }
 
 // 获取请求url,未编码的
 func (r *BaseRequest) GetRequestUrl() string {
 	if r.httpMethod == GET {
-		return r.GetScheme() + "://" + r.domain + r.path + "?" + GetUrlQueries(r.params)
+		return r.serviceDomain + r.path + "?" + GetUrlQueries(r.params)
 	} else if r.httpMethod == POST {
-		return r.GetScheme() + "://" + r.domain + r.path + "?" + GetUrlQueries(r.params)
-	} else if r.httpMethod == PUT{
-		return r.GetScheme() + "://" + r.domain + r.path + "?" + GetUrlQueries(r.params)
+		return r.serviceDomain + r.path + "?" + GetUrlQueries(r.params)
+	} else if r.httpMethod == PUT {
+		return r.serviceDomain + r.path + "?" + GetUrlQueries(r.params)
 	} else {
 		return ""
 	}
 }
 
-func (r *BaseRequest) GetAk() string  {
+func (r *BaseRequest) GetSchemeDomain() string {
+	return r.schemeDomain
+}
+
+func (r *BaseRequest) SetServiceDomain(service string) {
+	r.serviceDomain = r.schemeDomain + "/" + service
+}
+
+func (r *BaseRequest) GetAk() string {
 	return r.accessKeyId
 }
 
-func (r *BaseRequest) GetBodyData()  io.Reader{
+func (r *BaseRequest) GetBodyData() io.Reader {
 	return r.data
 }
 
@@ -104,41 +103,13 @@ func (r *BaseRequest) GetPath() string {
 	return r.path
 }
 
-func (r *BaseRequest) GetDomain() string {
-	return r.domain
+func (r *BaseRequest) GetServiceDomain(service string) (servieDomain string) {
+	// request 中更改serviceDomain
+	return r.serviceDomain
 }
 
-func (r *BaseRequest) GetScheme() string {
-	return r.scheme
-}
-
-func (r *BaseRequest) GetRootDomain() string {
-	return r.rootDomain
-}
-
-func (r *BaseRequest) GetServiceDomain(service string) (domain string) {
-	// request 中更改domain
-	rootDomain := r.rootDomain
-	domain = rootDomain + "/" + service
-	return
-}
-
-func (r *BaseRequest) SetDomain(domain string) {
-	r.domain = domain
-}
-
-func (r *BaseRequest) SetScheme(scheme string) {
-	scheme = strings.ToLower(scheme)
-	switch scheme {
-	case HTTP:
-		r.scheme = HTTP
-	default:
-		r.scheme = HTTPS
-	}
-}
-
-func (r *BaseRequest) SetRootDomain(rootDomain string) {
-	r.rootDomain = rootDomain
+func (r *BaseRequest) SetSchemeDomain(schemeDomain string) {
+	r.schemeDomain = schemeDomain
 }
 
 func (r *BaseRequest) SetHttpMethod(method string) {
@@ -169,9 +140,9 @@ func (r *BaseRequest) GetService() string {
 // url encode 之后的 ，暂时用不上
 func (r *BaseRequest) GetUrl() string {
 	if r.httpMethod == GET {
-		return r.GetScheme() + "://" + r.domain + r.path + "?" + GetUrlQueriesEncoded(r.params)
+		return r.serviceDomain + r.path + "?" + GetUrlQueriesEncoded(r.params)
 	} else if r.httpMethod == POST {
-		return r.GetScheme() + "://" + r.domain + r.path
+		return r.serviceDomain + r.path
 	} else {
 		return ""
 	}
@@ -185,7 +156,7 @@ func GetUrlQueries(params map[string]string) string {
 	values := ""
 	for key, value := range params {
 		if value != "" {
-			values += "&" + key + "=" +value
+			values += "&" + key + "=" + value
 		}
 	}
 	return values[1:]
@@ -211,7 +182,7 @@ func (r *BaseRequest) GetBodyReader() io.Reader {
 }
 
 func (r *BaseRequest) Init() *BaseRequest {
-	r.domain = ""
+	r.serviceDomain = ""
 	r.path = Path
 	r.params = make(map[string]string)
 	r.formParams = make(map[string]string)
@@ -227,7 +198,7 @@ func (r *BaseRequest) WithApiInfo(service, version, action string) *BaseRequest 
 
 /**
 公共参数
- */
+*/
 func CompleteCommonParams(request Request, region string) {
 	params := request.GetParams()
 	params["RegionId"] = region

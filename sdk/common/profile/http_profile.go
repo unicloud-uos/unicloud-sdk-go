@@ -3,19 +3,16 @@ package profile
 import tchttp "github.com/unicloud-uos/unicloud-sdk-go/sdk/common/http"
 
 type HttpProfile struct {
-	ReqMethod  string
-	ReqTimeout int
-	Scheme     string
-	RootDomain string
+	ReqMethod    string
+	ReqTimeout   int
+	SchemeDomain string
 	// Deprecated, use Scheme instead
-	Protocol string
 }
 
 func NewHttpProfile() *HttpProfile {
 	return &HttpProfile{
-		ReqMethod:  "GET",
-		ReqTimeout: 60,
-		Scheme:     "HTTPS",
-		RootDomain: tchttp.RootDomain,
+		ReqMethod:    tchttp.GET,
+		ReqTimeout:   60,
+		SchemeDomain: tchttp.SchemeDomain,
 	}
 }
