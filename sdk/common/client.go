@@ -63,9 +63,7 @@ func (c *Client) InitFromEnv() (cc *Client) {
 	secretId := os.Getenv("UnicloudSecretId")
 	secretKey := os.Getenv("UnicloudSecretKey")
 	region := os.Getenv("UnicloudRegion")
-	rootDomain := os.Getenv("UnicloudRootDomain")
-	scheme := os.Getenv("Scheme")
-
+	schemeDomain := os.Getenv("UnicloudSchemeDomain")
 	if region == "" {
 		fmt.Printf("Fail to init client because env.UnicloudRegion is null ")
 		return nil
@@ -81,11 +79,8 @@ func (c *Client) InitFromEnv() (cc *Client) {
 	)
 
 	cpf := profile.NewClientProfile()
-	if rootDomain != "" {
-		cpf.HttpProfile.RootDomain = rootDomain
-	}
-	if scheme != "" {
-		cpf.HttpProfile.Scheme = scheme
+	if schemeDomain != "" {
+		cpf.HttpProfile.SchemeDomain = schemeDomain
 	}
 
 	c.Init(region).WithCredential(credential).WithProfile(cpf)
@@ -96,19 +91,14 @@ func (c *Client) Send(request tchttp.Request, response tchttp.Response) (err err
 	// 反射把request 中有tag的值 拼接到url
 	tchttp.ConstructParams(request)
 
-	if request.GetScheme() == "" {
-		request.SetScheme(c.httpProfile.Scheme)
+	// env不设置SchemeDomain 取 "https://api.unicloud.com"
+	if request.GetSchemeDomain() == "" {
+		request.SetSchemeDomain(c.httpProfile.SchemeDomain)
 	}
 
-	if request.GetRootDomain() == "" {
-		request.SetRootDomain(c.httpProfile.RootDomain)
-	}
+	request.SetServiceDomain(request.GetService())
 
-	if request.GetDomain() == "" {
-		domain := request.GetServiceDomain(request.GetService())
-		request.SetDomain(domain)
-	}
-
+	// env不设置SchemeDomain 取 "Get"
 	if request.GetHttpMethod() == "" {
 		request.SetHttpMethod(c.httpProfile.ReqMethod)
 	}
