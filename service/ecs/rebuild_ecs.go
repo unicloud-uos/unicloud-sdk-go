@@ -1,4 +1,4 @@
-package ebs
+package ecs
 
 import (
 	"encoding/json"

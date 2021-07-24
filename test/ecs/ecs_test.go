@@ -33,8 +33,8 @@ func TestDetachDisk(t *testing.T) {
 }
 
 func TestGetPassword(t *testing.T) {
-	client := ebs.NewClientFromEnv()
-	request := ebs.NewGetPasswordRequest()
+	client := ecs.NewClientFromEnv()
+	request := ecs.NewGetPasswordRequest()
 	request.InstanceId = "ecs-kp2kky0k9z8g"
 	response, err := client.GetPassword(request)
 
@@ -46,8 +46,8 @@ func TestGetPassword(t *testing.T) {
 }
 
 func TestMonitor(t *testing.T) {
-	client := ebs.NewClientFromEnv()
-	request := ebs.NewMonitorRequest()
+	client := ecs.NewClientFromEnv()
+	request := ecs.NewMonitorRequest()
 	request.InstanceId = "ecs-kp2kky0k9z8g"
 	request.DateCategory = ""
 	response, err := client.Monitor(request)
@@ -60,8 +60,8 @@ func TestMonitor(t *testing.T) {
 }
 
 func TestDescribeEcs(t *testing.T) {
-	client := ebs.NewClientFromEnv()
-	request := ebs.NewDescribeEcsRequest()
+	client := ecs.NewClientFromEnv()
+	request := ecs.NewDescribeEcsRequest()
 	request.InstanceId = "ecs-kp2kky0k9z8g"
 	request.Page = 1
 	response, err := client.DescribeEcs(request)
@@ -74,8 +74,8 @@ func TestDescribeEcs(t *testing.T) {
 }
 
 func TestDetailEcs(t *testing.T) {
-	client := ebs.NewClientFromEnv()
-	request := ebs.NewDetailEcsRequest()
+	client := ecs.NewClientFromEnv()
+	request := ecs.NewDetailEcsRequest()
 	request.InstanceId = "ecs-kp2kky0k9z8g"
 	response, err := client.DetailEcs(request)
 
@@ -87,8 +87,8 @@ func TestDetailEcs(t *testing.T) {
 }
 
 func TestRunEcs(t *testing.T) {
-	client := ebs.NewClientFromEnv()
-	run := ebs.Body{
+	client := ecs.NewClientFromEnv()
+	run := ecs.Body{
 		AzoneId:         "HB1-BJMY2",
 		Description:     "",
 		HostName:        "i-F8D3QNsoC5",
@@ -101,7 +101,7 @@ func TestRunEcs(t *testing.T) {
 		SysDiskSize:     40,
 		VpcId:           "vpc-g68ou3ylornpb",
 	}
-	request := ebs.NewRunEcsRequest(run)
+	request := ecs.NewRunEcsRequest(run)
 	response, err := client.RunEcs(request)
 
 	if err != nil {
