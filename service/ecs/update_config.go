@@ -13,7 +13,7 @@ type UpdateConfigRequest struct {
 
 type UpdateConfigResponse struct {
 	*tchttp.BaseResponse
-	RequestId string `name:"RequestId" string`
+	RequestId string `name:"RequestId"`
 }
 
 func (r *UpdateConfigResponse) ToJsonString() string {

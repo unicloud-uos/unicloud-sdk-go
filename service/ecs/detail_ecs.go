@@ -12,31 +12,31 @@ type DetailEcsRequest struct {
 
 type DetailEcsResponse struct {
 	*tchttp.BaseResponse
-	RequestId       string   `name:"RequestId" string`
-	Id              string   `name:"id" string`
-	Name            string   `name:"name" string`
-	Status          string   `name:"status" string`
-	Description     string   `name:"description" string`
-	KeyPair         string   `name:"keyPair" string`
-	StartTime       int64    `name:"startTime" int64`
-	EndTime         int64    `name:"endTime" int64`
-	RegionId        string   `name:"RegionId" string`
-	RegionName      string   `name:"RegionName" string`
-	Cpu             int      `name:"cpu" int`
-	Memory          int      `name:"memory" int`
-	SysDiskCode     string   `name:"sysDiskCode" string`
-	SysDiskSize     int      `name:"sysDiskSize" int`
-	EipId           string   `name:"eipId" string`
-	EipIp           string   `name:"eipIp" string`
-	BandWidth       int      `name:bandWidth int`
-	Ip              string   `name:"ip" string`
-	ImageId         string   `name:"imageId" string`
-	ImageType       string   `name:"imageType" string`
-	ImageCode       string   `name:"imageCode" string`
-	ImageParentCode string   `name:"imageParentCode" string`
-	EniId           string   `name:"eniId" string`
-	DataDiskIds     []string `name:"dataDiskIds" []string`
-	SgIds           []string `name:"sgIds" []string`
+	RequestId       string   `name:"RequestId"`
+	Id              string   `name:"id"`
+	Name            string   `name:"name"`
+	Status          string   `name:"status"`
+	Description     string   `name:"description"`
+	KeyPair         string   `name:"keyPair"`
+	StartTime       int64    `name:"startTime"`
+	EndTime         int64    `name:"endTime"`
+	RegionId        string   `name:"RegionId"`
+	RegionName      string   `name:"RegionName"`
+	Cpu             int      `name:"cpu"`
+	Memory          int      `name:"memory"`
+	SysDiskCode     string   `name:"sysDiskCode"`
+	SysDiskSize     int      `name:"sysDiskSize"`
+	EipId           string   `name:"eipId"`
+	EipIp           string   `name:"eipIp"`
+	BandWidth       int      `name:"bandWidth"`
+	Ip              string   `name:"ip"`
+	ImageId         string   `name:"imageId"`
+	ImageType       string   `name:"imageType"`
+	ImageCode       string   `name:"imageCode"`
+	ImageParentCode string   `name:"imageParentCode"`
+	EniId           string   `name:"eniId"`
+	DataDiskIds     []string `name:"dataDiskIds"`
+	SgIds           []string `name:"sgIds"`
 }
 
 func (r *DetailEcsResponse) ToJsonString() string {

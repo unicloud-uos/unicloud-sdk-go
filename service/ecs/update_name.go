@@ -13,7 +13,7 @@ type UpdateNameRequest struct {
 
 type UpdateNameResponse struct {
 	*tchttp.BaseResponse
-	RequestId string `name:"RequestId" string`
+	RequestId string `name:"RequestId"`
 }
 
 func (r *UpdateNameResponse) ToJsonString() string {

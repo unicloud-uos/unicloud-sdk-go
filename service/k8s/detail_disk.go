@@ -7,14 +7,14 @@ import (
 
 type DetailDiskRequest struct {
 	*tchttp.BaseRequest
-	DiskId string `name:"DiskId" string`
+	DiskId string `name:"DiskId"`
 }
 
 type DetailDiskResponse struct {
 	*tchttp.BaseResponse
 	RequestId string `json:"RequestId"`
-	Status    bool   `name:"status" string`
-	Msg       string `name:"msg" string`
+	Status    bool   `name:"status"`
+	Msg       string `name:"msg"`
 	Disk      Disk   `json:"Res"`
 	Disk2     Disk2  `json:"Resd"`
 }

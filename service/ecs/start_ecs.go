@@ -12,7 +12,7 @@ type StartEcsRequest struct {
 
 type StartEcsResponse struct {
 	*tchttp.BaseResponse
-	RequestId string `name:"RequestId" string`
+	RequestId string `name:"RequestId"`
 }
 
 func (r *StartEcsResponse) ToJsonString() string {

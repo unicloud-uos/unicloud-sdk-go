@@ -13,7 +13,7 @@ type SystemDiskRequest struct {
 
 type SystemDiskResponse struct {
 	*tchttp.BaseResponse
-	RequestId string `name:"RequestId" string`
+	RequestId string `name:"RequestId"`
 }
 
 func (r *SystemDiskResponse) ToJsonString() string {

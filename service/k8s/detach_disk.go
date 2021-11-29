@@ -15,10 +15,10 @@ type DetachDiskRequest struct {
 
 type DetachDiskResponse struct {
 	*tchttp.BaseResponse
-	RequestId string      `name:"RequestId" string`
-	Status    bool        `name:"status" bool`
-	Msg       string      `name:"msg" string`
-	Res       interface{} `name:"res" string`
+	RequestId string      `name:"RequestId"`
+	Status    bool        `name:"status"`
+	Msg       string      `name:"msg"`
+	Res       interface{} `name:"res"`
 }
 
 func (r *DetachDiskResponse) ToJsonString() string {

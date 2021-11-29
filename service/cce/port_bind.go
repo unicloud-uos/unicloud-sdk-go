@@ -18,7 +18,7 @@ type PortBindArgs struct {
 
 type PortBindResponse struct {
 	*BaseResponse
-	Res interface{} `json:"res",omitempty`
+	Res interface{} `json:"res,omitempty"`
 }
 
 func (r *PortBindResponse) ToJsonString() string {

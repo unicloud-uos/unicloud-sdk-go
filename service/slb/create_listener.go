@@ -26,10 +26,10 @@ type CreateListenerArgs struct {
 	//LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 	//
 	//// 要将监听器创建到哪些端口，每个端口对应一个新的监听器
-	//Ports []*int64 `json:"Ports,omitempty" name:"Ports" list`
+	//Ports []*int64 `json:"Ports,omitempty" name:"Ports"`
 	//
 	//// 要创建的监听器名称列表，名称与Ports数组按序一一对应，如不需立即命名，则无需提供此参数
-	//ListenerNames []*string `json:"ListenerNames,omitempty" name:"ListenerNames" list`
+	//ListenerNames []*string `json:"ListenerNames,omitempty" name:"ListenerNames"`
 	//
 	//// 健康检查相关参数，此参数仅适用于TCP/UDP/TCP_SSL监听器
 	//HealthCheck *HealthCheck `json:"HealthCheck,omitempty" name:"HealthCheck"`
@@ -103,15 +103,15 @@ type CreateListenerResponse struct {
 	Response *struct {
 
 		// 创建的监听器的唯一标识数组
-		ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds" list`
+		ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds"`
 
 		// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
-	Code string `json:"Code`
-	Msg  string `json:"Msg`
+	Code string `json:"Code"`
+	Msg  string `json:"Msg"`
 	Res  struct {
-		Ids []string `json:"Ids`
-	} `json:"Res`
-	RequestId string `json:"RequestId`
+		Ids []string `json:"Ids"`
+	} `json:"Res"`
+	RequestId string `json:"RequestId"`
 }

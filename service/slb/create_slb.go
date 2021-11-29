@@ -61,17 +61,17 @@ type CreateLoadBalancerResponse struct {
 	Response *struct {
 
 		// 由负载均衡实例唯一 ID 组成的数组。
-		LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds" list`
+		LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds"`
 
 		// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 	RequestId string
-	Code      string `json:"Code`
-	Msg       string `json:"Msg`
+	Code      string `json:"Code"`
+	Msg       string `json:"Msg"`
 	Res       struct {
-		Resources []Resources `json:"Resources`
-	} `json:"Res`
+		Resources []Resources `json:"Resources"`
+	} `json:"Res"`
 }
 
 type Resources struct {

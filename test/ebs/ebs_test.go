@@ -23,14 +23,14 @@ func TestDetailDisk(t *testing.T) {
 	client := ebs.NewClientFromEnv()
 
 	request := ebs.NewDetailDiskRequest()
-	request.VolumeId = "ebs-kti3g24l8x4k"
+	request.VolumeId = "ebs-c8xc51m7ow6u"
 	response, err := client.DetailDisk(request)
 	if err != nil {
 		t.Errorf("An API error has returned: %s", err)
 		return
 	}
 	if len(response.Volume[0].AttachInfos) != 0 {
-		fmt.Println("InstanceId: "+response.Volume[0].AttachInfos[0].InstanceId)
+		fmt.Println("InstanceId: " + response.Volume[0].AttachInfos[0].InstanceId)
 	}
 
 	t.Log(response.ToJsonString())
@@ -45,6 +45,14 @@ func TestCreateDisk(t *testing.T) {
 	request.Capacity = 20
 	request.Quantity = 1
 
+	//request := ebs.NewCreateDiskRequest()
+	//request.AzId = "HB1-BJMY2"
+	//request.PayType = "CHARGING_HOURS"
+	//request.SpecificationCode = "ebs.highIO.ssd"
+	//request.Capacity = 20
+	//request.Quantity = 1
+	//request.RentCount = 1
+
 	response, err := client.CreateDisks(request)
 	if err != nil {
 		t.Errorf("An API error has returned: %s", err)
@@ -56,7 +64,7 @@ func TestCreateDisk(t *testing.T) {
 func TestDeleteDisk(t *testing.T) {
 	client := ebs.NewClientFromEnv()
 	request := ebs.NewDeleteDiskRequest()
-	request.VolumeIds = "ebs-kqc1j99qo48e"
+	request.VolumeIds = "ebs-c8xc51m7ow6u"
 	response, err := client.DeleteDisk(request)
 	if err != nil {
 		t.Errorf("An API error has returned: %s", err)

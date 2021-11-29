@@ -76,15 +76,15 @@ type CreateServerGroupResponse struct {
 	Response *struct {
 
 		// 创建的监听器的唯一标识数组
-		ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds" list`
+		ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds"`
 
 		// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
-	Code string `json:"Code`
-	Msg  string `json:"Msg`
+	Code string `json:"Code"`
+	Msg  string `json:"Msg"`
 	Res  struct {
-		Ids []string `json:"Ids`
-	} `json:"Res`
-	RequestId string `json:"RequestId`
+		Ids []string `json:"Ids"`
+	} `json:"Res"`
+	RequestId string `json:"RequestId"`
 }

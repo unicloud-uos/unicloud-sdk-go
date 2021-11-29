@@ -12,8 +12,8 @@ type GetPasswordRequest struct {
 
 type GetPasswordResponse struct {
 	*tchttp.BaseResponse
-	RequestId string `name:"RequestId" string`
-	Password  string `name:"password" string`
+	RequestId string `name:"RequestId"`
+	Password  string `name:"password"`
 }
 
 func (r *GetPasswordResponse) ToJsonString() string {

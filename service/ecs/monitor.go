@@ -12,8 +12,8 @@ type MonitorRequest struct {
 }
 type MonitorResponse struct {
 	*tchttp.BaseResponse
-	RequestId string            `name:"RequestId" string`
-	data      map[int64]float64 `name:"RequestId" map[int64]float64`
+	RequestId string            `name:"RequestId"`
+	data      map[int64]float64 `name:"RequestId"`
 }
 
 func NewMonitorRequest() (request *MonitorRequest) {

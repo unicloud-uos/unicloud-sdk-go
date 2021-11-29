@@ -8,7 +8,7 @@ import (
 
 type DetailDiskRequest struct {
 	*tchttp.BaseRequest
-	VolumeId string `name:"VolumeId" string`
+	VolumeId string `name:"VolumeId"`
 }
 
 type DetailDiskResponse struct {

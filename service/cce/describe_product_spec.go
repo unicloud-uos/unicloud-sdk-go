@@ -35,8 +35,8 @@ type ProductSpec struct {
 	Updatetime             int64  `json:"updateTime"`
 	Vcpu                   string `json:"vCPU"`
 	VcpuUnit               string `json:"vCPU_unit"`
-	EniCount               string `json:"eni_quantity""`
-	IpCountPerEni          string `json:"eni_ip_quantity""`
+	EniCount               string `json:"eni_quantity"`
+	IpCountPerEni          string `json:"eni_ip_quantity"`
 }
 
 func (r *DescribeProductSpecResponse) ToJsonString() string {

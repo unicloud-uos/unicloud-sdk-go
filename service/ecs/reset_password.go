@@ -13,7 +13,7 @@ type ResetPasswordRequest struct {
 
 type ResetPasswordResponse struct {
 	*tchttp.BaseResponse
-	RequestId string `name:"RequestId" string`
+	RequestId string `name:"RequestId"`
 }
 
 func (r *ResetPasswordResponse) ToJsonString() string {

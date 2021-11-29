@@ -12,7 +12,7 @@ type DeleteEcsRequest struct {
 
 type DeleteEcsResponse struct {
 	*tchttp.BaseResponse
-	RequestId string `name:"RequestId" string`
+	RequestId string `name:"RequestId"`
 }
 
 func (r *DeleteEcsResponse) ToJsonString() string {

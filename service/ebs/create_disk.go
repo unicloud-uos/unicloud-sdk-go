@@ -22,12 +22,12 @@ type CreateDiskRequest struct {
 
 	// 硬盘数量。可选范围：1~15
 	Quantity int `name:"Quantity"`
-
-	// 租期。预付费必传，可选范围：1个月、2个月、3个月、6个月、1年
-	RentCount int `name:"RentCount"`
-
-	// 租期单位。预付费必传，可选范围：day, month, year
-	RentUnit string `name:"RentUnit"`
+	//
+	//// 租期。预付费必传，可选范围：1个月、2个月、3个月、6个月、1年
+	//RentCount int `name:"RentCount"`
+	//
+	//// 租期单位。预付费必传，可选范围：day, month, year
+	//RentUnit string `name:"RentUnit"`
 
 	// 硬盘描述。
 	Description string `name:"Description"`
@@ -41,9 +41,9 @@ type CreateDiskRequest struct {
 
 type CreateDiskResponse struct {
 	*tchttp.BaseResponse
-	RequestId string   `name:"RequestId" string`
-	Ids       []string `name:"Ids" string`
-	OrderId   string   `name:"OrderId" string`
+	RequestId string   `name:"RequestId"`
+	Ids       []string `name:"Ids"`
+	OrderId   string   `name:"OrderId"`
 }
 
 func (r *CreateDiskResponse) ToJsonString() string {

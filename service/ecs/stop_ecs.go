@@ -12,7 +12,7 @@ type StopEcsRequest struct {
 
 type StopEcsResponse struct {
 	*tchttp.BaseResponse
-	RequestId string `name:"RequestId" string`
+	RequestId string `name:"RequestId"`
 }
 
 func (r *StopEcsResponse) ToJsonString() string {

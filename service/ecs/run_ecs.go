@@ -45,9 +45,9 @@ type Body struct {
 
 type RunEcsResponse struct {
 	*tchttp.BaseResponse
-	RequestId   string   `name:"RequestId" string`
-	OrderId     string   `name:"orderId" string`
-	InstanceIds []string `name:"instanceIds" []string`
+	RequestId   string   `name:"RequestId"`
+	OrderId     string   `name:"orderId"`
+	InstanceIds []string `name:"instanceIds"`
 }
 
 func (r *RunEcsResponse) ToJsonString() string {

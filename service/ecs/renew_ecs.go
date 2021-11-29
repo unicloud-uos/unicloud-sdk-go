@@ -14,7 +14,7 @@ type RenewEcsRequest struct {
 
 type RenewEcsResponse struct {
 	*tchttp.BaseResponse
-	RequestId string `name:"RequestId" string`
+	RequestId string `name:"RequestId"`
 }
 
 func (r *RenewEcsResponse) ToJsonString() string {

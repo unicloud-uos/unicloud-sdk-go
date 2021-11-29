@@ -15,40 +15,40 @@ type DescribeEcsRequest struct {
 }
 
 type Detail struct {
-	InstanceId       string   `name:"instanceId" string`
-	InstanceName     string   `name:"instanceName" string`
-	InstanceCode     string   `name:"instanceCode" string`
-	InstanceCodeName string   `name:"instanceCodeName" string`
-	Status           string   `name:"status" string`
-	ImageId          string   `name:"imageId" string`
-	ImageType        string   `name:"imageType" string`
-	ImageCode        string   `name:"imageCode" string`
-	ImageParentCode  string   `name:"imageParentCode" string`
-	Description      string   `name:"description" string`
-	Ip               string   `name:"ip" string`
-	EipId            string   `name:"eipId" string`
-	EipAddr          string   `name:"eipAddr" string`
-	EipSize          int      `name:"eipSize" int`
-	EipCode          string   `name:"eipCode" string`
-	SysDiskCode      string   `name:"sysDiskCode" string`
-	SysDiskSize      int      `name:"sysDiskSize" int`
-	StartTime        int64    `name:"startTime" int64 `
-	EndTime          int64    `name:"endTime" int64`
-	BindDiskCount    int      `name:"bindDiskCount" int`
-	EniId            string   `name:"eniId" string`
-	SecondaryEni     []string `name:"secondaryEni" []string`
-	AzoneId          string   `name:"azoneId" string`
-	PayType          string   `name:"payType" string`
+	InstanceId       string   `name:"instanceId"`
+	InstanceName     string   `name:"instanceName"`
+	InstanceCode     string   `name:"instanceCode"`
+	InstanceCodeName string   `name:"instanceCodeName"`
+	Status           string   `name:"status"`
+	ImageId          string   `name:"imageId"`
+	ImageType        string   `name:"imageType"`
+	ImageCode        string   `name:"imageCode"`
+	ImageParentCode  string   `name:"imageParentCode"`
+	Description      string   `name:"description"`
+	Ip               string   `name:"ip"`
+	EipId            string   `name:"eipId"`
+	EipAddr          string   `name:"eipAddr"`
+	EipSize          int      `name:"eipSize"`
+	EipCode          string   `name:"eipCode"`
+	SysDiskCode      string   `name:"sysDiskCode"`
+	SysDiskSize      int      `name:"sysDiskSize"`
+	StartTime        int64    `name:"startTime"`
+	EndTime          int64    `name:"endTime"`
+	BindDiskCount    int      `name:"bindDiskCount"`
+	EniId            string   `name:"eniId"`
+	SecondaryEni     []string `name:"secondaryEni"`
+	AzoneId          string   `name:"azoneId"`
+	PayType          string   `name:"payType"`
 }
 
 type DescribeEcsResponse struct {
 	*tchttp.BaseResponse
-	RequestId  string   `name:"RequestId" string`
-	Page       int      `name:"page" int`
-	Size       int      `name:"size" int`
-	TotalCount int      `name:"totalCount" int`
-	TotalPages int      `name:"totalPages" int`
-	List       []Detail `name: "list"`
+	RequestId  string   `name:"RequestId"`
+	Page       int      `name:"page"`
+	Size       int      `name:"size"`
+	TotalCount int      `name:"totalCount"`
+	TotalPages int      `name:"totalPages"`
+	List       []Detail `name:"list"`
 }
 
 func (r *DescribeEcsResponse) ToJsonString() string {
